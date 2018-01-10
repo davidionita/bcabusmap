@@ -1,49 +1,53 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>BCABus Map</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h3>My Google Maps Demo</h3>
-<div id="map"></div>
-<script>
-    function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 40.900572, lng: -74.033430},
+                // Set mapTypeId to SATELLITE in order
+                // to activate satellite imagery.
+                mapTypeId: 'satellite',
+                zoom: 90
+            });
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
+            async defer></script>
 
     <!--Tabletop.js (possible Google Sheets data pulling)-->
-<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-<script type='text/javascript'>
-    var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/pubhtml';
+        <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+        <script type='text/javascript'>
+            var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/pubhtml';
 
-    function init() {
-        Tabletop.init( { key: publicSpreadsheetUrl,
-            callback: showInfo,
-            simpleSheet: true } )
-    }
+            function init() {
+                Tabletop.init( { key: publicSpreadsheetUrl,
+                    callback: showInfo,
+                    simpleSheet: true } )
+            }
 
-    function showInfo(data, tabletop) {
-        alert('Check Chrome Console.')
-        console.log(data);
-    }
+            function showInfo(data, tabletop) {
+                alert('Check Chrome Console.')
+                console.log(data);
+            }
 
 
-    window.addEventListener('DOMContentLoaded', init)
-</script>-->
+            window.addEventListener('DOMContentLoaded', init)
+        </script>-->
 
 </body>
 </html>
