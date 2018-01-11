@@ -18,6 +18,8 @@
         function initMap() {
             // Create a map object and specify the DOM element for display.
             var  myLatLng = {lat: 40.900572, lng: -74.033430};
+            var  myLatLng2 = {lat: 40.900595, lng: -74.033430};
+            var  myLatLng3 = {lat: 40.900615, lng: -74.033430};
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: myLatLng,
@@ -26,11 +28,20 @@
                 mapTypeId: 'satellite',
                 zoom: 19
             });
-
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
-                title: 'Hello World!'
+                title: 'A1'
+            });
+            var marker2 = new google.maps.Marker({
+                position: myLatLng2,
+                map: map,
+                title: 'A2'
+            });
+            var marker3 = new google.maps.Marker({
+                position: myLatLng3,
+                map: map,
+                title: 'A3'
             });
         }
 
