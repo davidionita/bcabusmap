@@ -17,12 +17,20 @@
     <script>
         function initMap() {
             // Create a map object and specify the DOM element for display.
+            var  myLatLng = {lat: 40.900572, lng: -74.033430};
+
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 40.900572, lng: -74.033430},
+                center: myLatLng,
                 // Set mapTypeId to SATELLITE in order
                 // to activate satellite imagery.
                 mapTypeId: 'satellite',
                 zoom: 19
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
             });
         }
 
