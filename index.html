@@ -20,7 +20,7 @@
                 // Set mapTypeId to SATELLITE in order
                 // to activate satellite imagery.
                 mapTypeId: 'satellite',
-                zoom: 90
+                zoom: 19
             });
         }
 
@@ -29,25 +29,43 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
             async defer></script>
 
-    <!--Tabletop.js (possible Google Sheets data pulling)-->
-        <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-        <script type='text/javascript'>
-            var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/pubhtml';
+    <h3>Google Sheets API Quickstart</h3>
 
-            function init() {
-                Tabletop.init( { key: publicSpreadsheetUrl,
-                    callback: showInfo,
-                    simpleSheet: true } )
-            }
+    <script src="https://apis.google.com/js/api.js"></script>
 
-            function showInfo(data, tabletop) {
-                alert('Check Chrome Console.')
-                console.log(data);
-            }
+    <script>
+        function loadClient() {
+            gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
+            return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
+                .then(function() {
+                    console.log("GAPI client loaded for API");
+                }, function(error) {
+                    console.error("Error loading GAPI client for API");
+                });
+        }
+        // Make sure the client is loaded before calling this method.
+        function execute() {
+            return gapi.client.sheets.spreadsheets.get({
+                "spreadsheetId": "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
+                "includeGridData": "true",
+                "ranges": [
+                    "A2:B24",
+                    "C2:D25"
+                ]
+            })
+                .then(function(response) {
+                    // Handle the results here (response.result has the parsed body).
+                    console.log("Response", response);
+                }, function(error) {
+                    console.error("Execute error", error);
+                });
+        }
+        gapi.load("client");
+    </script>
 
+    <button onclick="loadClient()">load</button>
+    <button onclick="execute()">execute</button>
 
-            window.addEventListener('DOMContentLoaded', init)
-        </script>-->
 
 </body>
 </html>
