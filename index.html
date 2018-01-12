@@ -6,13 +6,17 @@
     <meta charset="UTF-8">
     <title>BCABus Map</title>
     <link rel="stylesheet" href="style.css">
+    <!--Google API Key: AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss-->
 </head>
 
-<body>
+<body onload="loadClient()">
 
     <!--Google Maps API-->
 
     <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
+            async defer></script>
 
     <script>
         function initMap() {
@@ -313,14 +317,11 @@
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
-            async defer></script>
-
     <!--Google Sheets API-->
 
     <script src="https://apis.google.com/js/api.js"></script>
 
-    <script>
+    <!--<script>
         function loadClient() {
             gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
             return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
@@ -334,7 +335,7 @@
         function execute() {
             return gapi.client.sheets.spreadsheets.get({
                 "spreadsheetId": "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
-                "includeGridData": "true",
+                "includeGridData": "false",
                 "ranges": [
                     "A2:B24",
                     "C2:D25"
@@ -348,6 +349,20 @@
                 });
         }
         gapi.load("client");
+    </script>-->
+    <script>
+        var ranges = [
+            // Range names ...
+            "A2:B24",
+            "C2:D25"
+        ];
+        gapi.client.sheets.spreadsheets.values.batchGet({
+            spreadsheetId: '1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks',
+            ranges: ranges
+        }).then((response) => {
+            var result = response.result;
+            console.log('${result.valueRanges.length} ranges retrieved.');
+        });
     </script>
 
     <button onclick="loadClient()">load</button>
