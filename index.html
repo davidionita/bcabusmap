@@ -9,7 +9,7 @@
     <!--Google API Key: AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss-->
 </head>
 
-<body onload="loadClient()">
+<body>
 
     <!--Google Maps API-->
 
@@ -23,6 +23,31 @@
     <!--Google Sheets API-->
 
     <script src="https://apis.google.com/js/api.js"></script>
+
+    <script>
+        function loadClient() {
+            gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
+            return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
+                .then(function() {
+                    console.log("GAPI client loaded for API");
+                }, function(error) {
+                    console.error("Error loading GAPI client for API");
+                });
+        }
+
+        function execute() {
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
+                range: "B2:B24"
+            }).then((response) => {
+                var result = response.result;
+                var numRows = result.values ? result.values.length : 0;
+                console.log(`${numRows} rows retrieved.`);
+            });
+        }
+
+        gapi.load("client");
+    </script>
 
     <button onclick="loadClient()">load</button>
     <button onclick="execute()">execute</button>
