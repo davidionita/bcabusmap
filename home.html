@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BCABus Map</title>
+    <link rel="stylesheet" href="style.css">
+    <!--Google API Key: AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss-->
+
+    <!--Get & Parse Data from Google Sheet -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <script> //Get & Parse JSON
+    var app = angular.module('myApp', ['ngCookies']);
+    app.controller('SuperCtrl',function($scope, $http, $timeout, $cookies) {
+        $scope.setCookie = function(cname, cvalue, clear) {
+            var expireDate = new Date();
+            expireDate.setDate(expireDate.getDate() + 365);
+
+
+            $cookies.put(cname, cvalue, {'expires': expireDate});
+            if (clear == "yes"){
+                $scope.townSearch = "";
+            }
+        };
+        $scope.getData = function() {
+            //Sample: https://spreadsheets.google.com/feeds/list/1tJllDysWV5Xn9C7MKlVDttPXp2jXuQCYLP3jbf4FW28/od6/public/values?alt=json
+            //Real: https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json
+            $http.get("https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json").success(function(response) {
+                $scope.locations = response.feed.entry;
+                var rowLength = $scope.locations.length;
+                var townsFirst = [];
+                var townsSecond = [];
+                for (var i = 0; i < rowLength; i++) {
+                    if ($scope.locations[i].gsx$townsbuslocation.$t !== "") {
+                        townsFirst.push({"name": $scope.locations[i].gsx$townsbuslocation.$t.trim()});
+                        if ($scope.locations[i].hasOwnProperty('gsx$_cokwr')) {
+                            townsFirst[i].location = $scope.locations[i].gsx$_cokwr.$t.toUpperCase().trim();
+                        }
+                        else { townsFirst[i].location = ""; }
+                    }
+                    if ($scope.locations[i].gsx$townsbuslocation_2.$t !== "") {
+                        townsSecond.push({"name": $scope.locations[i].gsx$townsbuslocation_2.$t.trim()});
+                        if ($scope.locations[i].hasOwnProperty('gsx$_cre1l')) {
+                            townsSecond[i].location = $scope.locations[i].gsx$_cre1l.$t.toUpperCase().trim();
+                        }
+                        else { townsSecond[i].location = ""; }
+                    }
+
+                }
+                $scope.towns = townsFirst.concat(townsSecond);
+            });
+        }
+        $scope.interval = function() {
+            $timeout(function() {
+                $scope.getData();
+                $scope.interval();
+            }, 2500)
+        };
+        $scope.getData();
+        $scope.interval();
+
+    });
+
+    </script>
+
+    <!--Google Maps Integration-->
+
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
+            async defer></script>
+
+    <script src="initMap.js"></script>
+
+</head>
+
+<body class="blue lighten-5" ng-app="myApp" ng-controller="SuperCtrl">
+<head>
+    <!-- Search -->
+    <nav class="mobile-content search-nav blue row">
+        <div class="col s10 nav-wrapper">
+            <form>
+                <div class="input-field">
+                    <input class="left-align" id="search" type="search" placeholder="Search for towns here..." autocomplete="off" ng-model="townSearch">
+                    <label for="search"><i class="material-icons">search</i></label>
+                </div>
+            </form>
+        </div>
+
+    </nav>
+    <!-- Large Header -->
+    <nav class="not-mobile blue">
+        <div class="nav-wrapper">
+            <a style="padding: 0 2%" href="#" class="brand-logo">BCABus</a>
+        </div>
+    </nav>
+</head>
+<!-- Main Content: Made By & Towns -->
+<main>
+
+    <div class="row mobile-content" style="padding-top: 2%">
+        <div class="col l12 m12 s12">
+
+            <!-- Favorite Town -->
+            <ul ng-show="true" ng-if="getCookie('favorite') && getCookie('favorite') !== true" class="collection favoriteList">
+                <li ng-repeat="z in favorite" class="collection-item favoriteItem">
+                    <div style="margin-top: -4%; margin-bottom: -2%;" class="valign-wrapper row">
+                        <h5 class="valign col l10 m10 s10 favoriteTown">{{z.name}}</h5>
+                        <p style="margin-left: 0" class="col l2 m2 s2">
+                            <i ng-click="removeFavorite(z)" style="font-size: 3rem; color: gold; cursor: pointer" class="valign material-icons">star</i>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <h6 style="margin-bottom: -5%; margin-top: 0" class="col l10 m10 s10 favoriteLocation">{{z.location}}</h6>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Town List -->
+            <ul class="townList collection with-header">
+                <li ng-show="townSearch == ''" class="collection-header townList-header valign-wrapper"><h2>Town List</h2></li>
+                <li ng-repeat="x in towns | filter: townSearch" style="height: 5%;" id='{{x|lowercase}}' class="noPad collection-item townItem">
+                    <div style="margin-top: -2%; margin-bottom: -3%; margin-left: -3%" class="valign-wrapper row">
+                        <p class="valign col l9 m9 s9"><span>{{x.name}}</span></p>
+                        <p class="valign locationAlign right-align col l1 m1 s1"><span>{{x.location}}&nbsp;&nbsp;</span></p>
+                        <p ng-click="addFavorite(x)" scroll-top class="valign col l1 m1 s1">
+                            <i style="color: grey; cursor: pointer" class="material-icons valign">star</i></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="not-mobile row">
+        <div class="col l12 m12 s12 row">
+            <!-- Cards for Large Screens -->
+            <div ng-repeat="x in towns" class="col xl l4 m6 card white">
+                <div class="card-content black-text">
+                    <p>{{x.name}}</p><p>{{x.location || "Not here yet!"}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="mobile-content valign page-footer blue darken-2 light-blue-text text-lighten-5 center-align">
+    <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6><h6>Questions? Answers? Email us at <span class="email">adapap@bergen.org</span> or <span class="email">luklas@bergen.org</span>.</h6></div>
+</footer>
+</body>
+
+</html>
