@@ -26,8 +26,7 @@
 
     <script>
         var response;
-        var cellValuesFirst;
-        var cellValuesSecond;
+        var cellValues;
 
         function loadClient() {
             gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
@@ -39,16 +38,41 @@
                 });
         }
 
+        // function execute() {
+        //     response = gapi.client.sheets.spreadsheets.values.get({
+        //         spreadsheetId: "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
+        //         range: "A2:B24"
+        //     }).then((response) => {
+        //         var result = response.result;
+        //         var numRows = result.values ? result.values.length : 0;
+        //         console.log(`${numRows} rows retrieved.`);
+        //         cellValues = result.values;
+        //         console.log(cellValues);
+        //     });
+        // }
+
         function execute() {
-            response = gapi.client.sheets.spreadsheets.values.get({
+            var townLocDict = {};
+
+            var ranges = [
+                "A2:B24",
+                "C2:D25"
+            ];
+            gapi.client.sheets.spreadsheets.values.batchGet({
                 spreadsheetId: "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
-                range: "A2:B24"
+                ranges: ranges
             }).then((response) => {
                 var result = response.result;
-                var numRows = result.values ? result.values.length : 0;
-                console.log(`${numRows} rows retrieved.`);
-                cellValues = result.values;
-                console.log(cellValues);
+                console.log(`${result.valueRanges.length} ranges retrieved.`);
+
+                // For each ValueRange object
+                for (var i = 0; i < result.valueRanges.length; i++) {
+                    // For each town - location list pair
+                    for (var j = 0; j < result.valueRanges[i].values.length; j++) {
+                        townLocDict[result.valueRanges[i].values[j][0]] = result.valueRanges[i].values[j][1];
+                    }
+                }
+                console.log(townLocDict);
             });
         }
 
