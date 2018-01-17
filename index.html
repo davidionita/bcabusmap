@@ -25,6 +25,10 @@
     <script src="https://apis.google.com/js/api.js"></script>
 
     <script>
+        var response;
+        var cellValuesFirst;
+        var cellValuesSecond;
+
         function loadClient() {
             gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
             return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
@@ -36,13 +40,15 @@
         }
 
         function execute() {
-            gapi.client.sheets.spreadsheets.values.get({
+            response = gapi.client.sheets.spreadsheets.values.get({
                 spreadsheetId: "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
-                range: "B2:B24"
+                range: "A2:B24"
             }).then((response) => {
                 var result = response.result;
                 var numRows = result.values ? result.values.length : 0;
                 console.log(`${numRows} rows retrieved.`);
+                cellValues = result.values;
+                console.log(cellValues);
             });
         }
 
