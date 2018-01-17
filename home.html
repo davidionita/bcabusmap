@@ -20,12 +20,6 @@
         $scope.setCookie = function(cname, cvalue, clear) {
             var expireDate = new Date();
             expireDate.setDate(expireDate.getDate() + 365);
-
-
-            $cookies.put(cname, cvalue, {'expires': expireDate});
-            if (clear == "yes"){
-                $scope.townSearch = "";
-            }
         };
         $scope.getData = function() {
             //Sample: https://spreadsheets.google.com/feeds/list/1tJllDysWV5Xn9C7MKlVDttPXp2jXuQCYLP3jbf4FW28/od6/public/values?alt=json
@@ -106,21 +100,6 @@
     <div class="row mobile-content" style="padding-top: 2%">
         <div class="col l12 m12 s12">
 
-            <!-- Favorite Town -->
-            <ul ng-show="true" ng-if="getCookie('favorite') && getCookie('favorite') !== true" class="collection favoriteList">
-                <li ng-repeat="z in favorite" class="collection-item favoriteItem">
-                    <div style="margin-top: -4%; margin-bottom: -2%;" class="valign-wrapper row">
-                        <h5 class="valign col l10 m10 s10 favoriteTown">{{z.name}}</h5>
-                        <p style="margin-left: 0" class="col l2 m2 s2">
-                            <i ng-click="removeFavorite(z)" style="font-size: 3rem; color: gold; cursor: pointer" class="valign material-icons">star</i>
-                        </p>
-                    </div>
-                    <div class="row">
-                        <h6 style="margin-bottom: -5%; margin-top: 0" class="col l10 m10 s10 favoriteLocation">{{z.location}}</h6>
-                    </div>
-                </li>
-            </ul>
-
             <!-- Town List -->
             <ul class="townList collection with-header">
                 <li ng-show="townSearch == ''" class="collection-header townList-header valign-wrapper"><h2>Town List</h2></li>
@@ -128,8 +107,6 @@
                     <div style="margin-top: -2%; margin-bottom: -3%; margin-left: -3%" class="valign-wrapper row">
                         <p class="valign col l9 m9 s9"><span>{{x.name}}</span></p>
                         <p class="valign locationAlign right-align col l1 m1 s1"><span>{{x.location}}&nbsp;&nbsp;</span></p>
-                        <p ng-click="addFavorite(x)" scroll-top class="valign col l1 m1 s1">
-                            <i style="color: grey; cursor: pointer" class="material-icons valign">star</i></p>
                     </div>
                 </li>
             </ul>
@@ -150,8 +127,118 @@
 
 <!-- Footer -->
 <footer class="mobile-content valign page-footer blue darken-2 light-blue-text text-lighten-5 center-align">
-    <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6><h6>Questions? Answers? Email us at <span class="email">adapap@bergen.org</span> or <span class="email">luklas@bergen.org</span>.</h6></div>
+    <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6></div>
 </footer>
+
 </body>
+
+<style>
+    #sitewrap {
+    }
+    ::-webkit-input-placeholder {
+        color: white;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+        color: white;
+    }
+    ::-moz-placeholder {  /* Firefox 19+ */
+        color: white;
+    }
+    :-ms-input-placeholder {
+        color: white;
+    }
+    *:not(input) {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+        outline: none;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        -webkit-tap-highlight-color: transparent;
+    }
+    h5 {
+        font-size: 1.3rem;
+    }
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    .closeMadeBy {
+        padding-right: 1%;
+        color: white;
+        font-size: 1.5rem;
+    }
+    .email {
+        border-bottom: 1px solid white;
+        color: white;
+    }
+    .border {
+        border: 1px solid red;
+    }
+    .pullLeft {
+        left: 5%;
+    }
+    .madeBy {
+        width: 100%;
+        padding: 1% 0;
+    }
+    .noti-icon {
+        left: -10px !important;
+    }
+    .noti-title {
+        padding: 8px;
+        margin-left: -10px;
+    }
+    .input-icon {
+        font-size: 2.3rem !important;
+    }
+    .input-icon2 {
+        margin-left: -8px !important;
+    }
+    .input-text {
+        margin-top: 5px !important;
+        margin-left: 8px !important;
+        height: 3rem !important;
+    }
+    .anti-padding {
+        margin-left: -10px !important;
+    }
+    .switch *, .lever * {
+        font-size: 1.3rem;
+    }
+    .smsinfo {
+        color: grey;
+        line-height: 1.2rem;
+    }
+    .saveButton {
+        height: 2.4rem !important;
+        line-height: 2.4rem !important;
+    }
+    .d {
+        border: 3px solid orange;
+    }
+    #slide-out {
+        padding-left: 10px;
+        width: 85%;
+    }
+    @media only screen and (max-width: 768px) { /* Mobile */
+        .not-mobile {
+            visibility: hidden;
+            display: none;
+        }
+    }
+    @media only screen and (min-width: 768px) { /* Desktop */
+        .mobile-content {
+            visibility: hidden;
+            display: none;
+        }
+        .xl {
+            margin-bottom: -1%;
+        }
+    }
+</style>
 
 </html>
