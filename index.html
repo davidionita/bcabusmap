@@ -27,10 +27,14 @@
 
 </head>
 
-<body>
+<body onload="loadClient()">
 
-    <button onclick="loadClient()">load</button>
-    <button onclick="execute()">execute</button>
+    <script>
+        setTimeout(function(){
+            execute();
+        }, 1500);
+    </script>
+
     <button onclick="initMap()">refresh</button>
 
 </body>
