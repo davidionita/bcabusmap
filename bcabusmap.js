@@ -45,5 +45,4 @@ function interval() {
         // initMap();
     }, 2500);}
 
-loadClient();
 interval();
