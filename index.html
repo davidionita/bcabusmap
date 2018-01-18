@@ -7,9 +7,6 @@
     <title>BCABus Map</title>
     <link rel="stylesheet" href="style.css">
     <!--Google API Key: AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss-->
-</head>
-
-<body onload="loadClient()">
 
     <!--Google Maps API-->
 
@@ -22,60 +19,15 @@
 
     <!--Google Sheets API-->
 
+    <div id="spreadsheet"></div>
+
     <script src="https://apis.google.com/js/api.js"></script>
 
-    <!--<script>
-        function loadClient() {
-            gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
-            return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
-                .then(function() {
-                    console.log("GAPI client loaded for API");
-                }, function(error) {
-                    console.error("Error loading GAPI client for API");
-                });
-        }
-        // Make sure the client is loaded before calling this method.
-        function execute() {
-            return gapi.client.sheets.spreadsheets.get({
-                "spreadsheetId": "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
-                "includeGridData": "false",
-                "ranges": [
-                    "A2:B24",
-                    "C2:D25"
-                ]
-            })
-                .then(function(response) {
-                    // Handle the results here (response.result has the parsed body).
-                    console.log("Response", response);
-                }, function(error) {
-                    console.error("Execute error", error);
-                });
-        }
-        gapi.load("client");
-    </script>-->
-    <script>
-        var ranges = [
-            // Range names ...
-            "A2:B24",
-            "C2:D25"
-        ];
-        gapi.client.sheets.spreadsheets.values.batchGet({
-            spreadsheetId: '1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks',
-            ranges: ranges
-        }).then((response) => {
-            var result = response.result;
-            console.log('${result.valueRanges.length} ranges retrieved.');
-        });
-    </script>
+    <script src="bcabusmap.js"></script>
 
-    <script>
-        function initSheets(callback) {
-            console.log(loadClient());
-            console.log(callback());
-        }
+</head>
 
-        initSheets(execute());
-    </script>
+<body>
 
     <!--
                                                                                                                                                       %
@@ -127,7 +79,6 @@
     <button onclick="loadClient()">load</button>
     <button onclick="execute()">execute</button>
     <button onclick="initMap()">refresh</button>
-
 
 </body>
 </html>
