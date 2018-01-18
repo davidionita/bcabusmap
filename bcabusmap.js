@@ -11,19 +11,6 @@ function loadClient() {
         });
 }
 
-// function execute() {
-//     response = gapi.client.sheets.spreadsheets.values.get({
-//         spreadsheetId: "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
-//         range: "A2:B24"
-//     }).then((response) => {
-//         var result = response.result;
-//         var numRows = result.values ? result.values.length : 0;
-//         console.log(`${numRows} rows retrieved.`);
-//         cellValues = result.values;
-//         console.log(cellValues);
-//     });
-// }
-
 function execute() {
     var townLocDict = {};
 
@@ -50,3 +37,13 @@ function execute() {
 }
 
 gapi.load("client");
+
+function interval() {
+    setTimeout(function(){
+        execute();
+        interval();
+        // initMap();
+    }, 2500);}
+
+loadClient();
+interval();
