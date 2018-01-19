@@ -13,8 +13,6 @@ function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map'), {
         center: centerPos,
-        // Set mapTypeId to SATELLITE in order
-        // to activate satellite imagery.
         mapTypeId: 'satellite',
         zoom: 19
     });

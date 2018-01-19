@@ -10,9 +10,9 @@ function loadClient() {
             console.error("Error loading GAPI client for API");
         });
 }
+var townLocDict = {}
 
 function execute() {
-    var townLocDict = {};
 
     var ranges = [
         "A2:B24",
