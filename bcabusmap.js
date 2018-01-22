@@ -1,5 +1,6 @@
 var response;
 var cellValues;
+var townLocDict = {};
 
 function loadClient() {
     gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
@@ -42,7 +43,7 @@ function interval() {
     setTimeout(function(){
         execute();
         interval();
-        // initMap();
+        initMap();
     }, 2500);}
 
 interval();
