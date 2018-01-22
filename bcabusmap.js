@@ -11,7 +11,6 @@ function loadClient() {
             console.error("Error loading GAPI client for API");
         });
 }
-var townLocDict = {}
 
 function execute() {
 
@@ -43,7 +42,7 @@ function interval() {
     setTimeout(function(){
         execute();
         interval();
-        initMap();
+        // initMap();
     }, 2500);}
 
 interval();
