@@ -29,14 +29,19 @@ function execute() {
         for (var i = 0; i < result.valueRanges.length; i++) {
             // For each town - location list pair
             for (var j = 0; j < result.valueRanges[i].values.length; j++) {
-                townLocDict[result.valueRanges[i].values[j][0]] = result.valueRanges[i].values[j][1];
+                if (result.valueRanges[i].values[j][1] == undefined){
+                    townLocDict[result.valueRanges[i].values[j][0]] = "Not here yet!";
+                }
+                else{
+                    townLocDict[result.valueRanges[i].values[j][0]] = result.valueRanges[i].values[j][1];
+                }
             }
         }
         console.log(townLocDict);
     });
     for (town in townLocDict) {
         console.log(town);
-        console.log(townLocDict[town])
+        console.log(townLocDict[town]);
     }
 
 
