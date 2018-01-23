@@ -34,6 +34,12 @@ function execute() {
         }
         console.log(townLocDict);
     });
+    for (town in townLocDict) {
+        console.log(town);
+        console.log(townLocDict[town])
+    }
+
+
 }
 
 gapi.load("client");
@@ -43,6 +49,8 @@ function interval() {
         execute();
         interval();
         // initMap();
-    }, 2500);}
+    }, 3000);}
 
 interval();
+
+

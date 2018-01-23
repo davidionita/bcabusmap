@@ -2,6 +2,7 @@
 2. Run loop to update update markers.*/
 
 var map;
+var posCoordDict;
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
