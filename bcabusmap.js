@@ -39,23 +39,19 @@ function execute() {
         }
         console.log(townLocDict);
     });
-    for (town in townLocDict) {
+
+    /*for (town in townLocDict) {
         console.log(town);
         console.log(townLocDict[town]);
-    }
+    }*/
 
 
 }
 
 gapi.load("client");
 
-function interval() {
-    setTimeout(function(){
-        execute();
-        interval();
-        // initMap();
-    }, 3000);}
-
-interval();
-
+setInterval(function () {
+    execute();
+    setMarkers();
+    }, 3000);
 
