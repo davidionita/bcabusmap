@@ -88,6 +88,7 @@ var posCoordDict = {
     "J10" : {lat: 40.9007 - 0.00005 * 4, lng: -74.03365 + 0.00009 * 10},
 };
 markers = [];
+infoWindows = {};
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
@@ -106,6 +107,12 @@ function initMap() {
 
 }
 
+function bindInfoWindow(marker, map, infowindow, html) {
+    marker.addListener('click', function() {
+        infowindow.open(map, this);
+    });
+}
+
 function setMarkers() {
 
     var icon = {
@@ -113,13 +120,30 @@ function setMarkers() {
         scaledSize: new google.maps.Size(40, 40)
     };
     for (town in townLocDict) {
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h6 id="sixthHeading" class="sixthHeading">' + town + '</h6>'+
+            '<div id="bodyContent">'+
+            '<p>' + townLocDict[town] + '</p>'+
+            '</div>'+
+            '</div>';
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
         var marker = new google.maps.Marker({
             position: posCoordDict[townLocDict[town]],
             map: map,
             title: town,
             icon: icon
         });
+
+        bindInfoWindow(marker, map, infoWindow);
+
         marker.setMap(map);
         markers.push(marker);
     }
+    console.log(infoWindows);
 }
