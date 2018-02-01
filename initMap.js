@@ -107,11 +107,17 @@ function initMap() {
 }
 
 function setMarkers() {
+
+    var icon = {
+        url: 'yellow_school_bus.png',
+        scaledSize: new google.maps.Size(40, 40)
+    };
     for (town in townLocDict) {
         var marker = new google.maps.Marker({
             position: posCoordDict[townLocDict[town]],
             map: map,
-            title: town
+            title: town,
+            icon: icon
         });
         marker.setMap(map);
         markers.push(marker);

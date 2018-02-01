@@ -65,7 +65,7 @@
 
 </head>
 
-<body class="blue lighten-5" ng-app="myApp" ng-controller="SuperCtrl">
+<body class="blue lighten-5" ng-app="myApp" ng-controller="SuperCtrl" onload="loadClient()">
 <head>
     <!-- Search -->
     <nav class="mobile-content search-nav blue row">
@@ -131,6 +131,12 @@
 <footer class="mobile-content valign page-footer blue darken-2 light-blue-text text-lighten-5 center-align">
     <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6></div>
 </footer>
+
+<!--Google Sheets API-->
+
+<script src="https://apis.google.com/js/api.js"></script>
+
+<script src="bcabusmap.js"></script>
 
 </body>
 
