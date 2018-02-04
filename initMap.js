@@ -86,13 +86,14 @@ var posCoordDict = {
     "J8" : {lat: 40.9007 - 0.00005 * 4, lng: -74.03365 + 0.00009 * 8},
     "J9" : {lat: 40.9007 - 0.00005 * 4, lng: -74.03365 + 0.00009 * 9},
     "J10" : {lat: 40.9007 - 0.00005 * 4, lng: -74.03365 + 0.00009 * 10},
+    "Not here yet!" : {lat:0, lng: 0}
 };
 markers = [];
 infoWindows = {};
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
-    var centerPos = {lat: 40.900572, lng: -74.033430};
+    var centerPos = {lat: 40.900464, lng: -74.033565};
 
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -100,7 +101,7 @@ function initMap() {
         // Set mapTypeId to SATELLITE in order
         // to activate satellite imagery.
         mapTypeId: 'satellite',
-        zoom: 19
+        zoom: 20
     });
 
     setMarkers();
