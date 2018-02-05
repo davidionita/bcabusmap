@@ -88,8 +88,8 @@ var posCoordDict = {
     "J10" : {lat: 40.9007 - 0.00005 * 4, lng: -74.03365 + 0.00009 * 10},
     "Not here yet!" : {lat:0, lng: 0}
 };
-markers = [];
-infoWindows = {};
+var markers = [];
+var before = {};
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
@@ -115,6 +115,12 @@ function bindInfoWindow(marker, map, infowindow, html) {
 }
 
 function setMarkers() {
+    /*for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }*/
+
+    markers = [];
+    var skip = [];
 
     var icon = {
         url: 'yellow_school_bus.png',
@@ -124,7 +130,7 @@ function setMarkers() {
         var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h6 id="sixthHeading" class="sixthHeading">' + town + '</h6>'+
+            '<h4 id="fourthHeading" class="fourthHeading">' + town + '</h4>'+
             '<div id="bodyContent">'+
             '<p>' + townLocDict[town] + '</p>'+
             '</div>'+
@@ -143,8 +149,13 @@ function setMarkers() {
 
         bindInfoWindow(marker, map, infoWindow);
 
-        marker.setMap(map);
-        markers.push(marker);
+
+        if (marker != before[town]) {
+            if (before[town] != undefined) {
+                before[town].setMap(null);
+            }
+            before[town] = marker;
+            before[town].setMap(map);
+        }
     }
-    console.log(infoWindows);
 }
