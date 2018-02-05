@@ -90,6 +90,7 @@ var posCoordDict = {
 };
 var markers = [];
 var before = {};
+var first = true;
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
@@ -115,13 +116,6 @@ function bindInfoWindow(marker, map, infowindow, html) {
 }
 
 function setMarkers() {
-    /*for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-    }*/
-
-    markers = [];
-    var skip = [];
-
     var icon = {
         url: 'yellow_school_bus.png',
         scaledSize: new google.maps.Size(40, 40)
@@ -149,13 +143,17 @@ function setMarkers() {
 
         bindInfoWindow(marker, map, infoWindow);
 
+        if (before[town] != undefined){
+            marker.setMap(null);
+        } else {
+            before[town] = marker;
+        }
 
-        if (marker != before[town]) {
-            if (before[town] != undefined) {
-                before[town].setMap(null);
-            }
+        if (marker.getPosition().lat() != before[town].getPosition().lat() || marker.getPosition().lng() != before[town].getPosition().lng()) {
+            before[town].setMap(null);
             before[town] = marker;
             before[town].setMap(map);
         }
+
     }
 }
