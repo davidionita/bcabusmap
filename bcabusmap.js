@@ -19,7 +19,9 @@ function execute() {
         "C2:D25"
     ];
     gapi.client.sheets.spreadsheets.values.batchGet({
-        spreadsheetId: "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
+        // Test:  1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks
+        // Real:  1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o
+        spreadsheetId: "1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o",
         ranges: ranges
     }).then((response) => {
         var result = response.result;
