@@ -94,7 +94,7 @@ var first = true;
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
-    var centerPos = {lat: 40.900464, lng: -74.033565};
+    var centerPos = {lat: 40.900464, lng: -74.0333};
 
 
     map = new google.maps.Map(document.getElementById('map'), {
