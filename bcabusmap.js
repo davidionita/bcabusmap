@@ -7,6 +7,7 @@ function loadClient() {
     return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
         .then(function() {
             console.log("GAPI client loaded for API");
+            execute();
         }, function(error) {
             console.error("Error loading GAPI client for API");
         });
@@ -40,6 +41,7 @@ function execute() {
             }
         }
         console.log(townLocDict);
+        setMarkers();
     });
 
     /*for (town in townLocDict) {
