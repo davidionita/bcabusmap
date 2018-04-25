@@ -1,6 +1,6 @@
-var response;
-var cellValues;
-var townLocDict = {};
+let response;
+let cellValues;
+let townLocDict = {};
 
 function loadClient() {
     gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
@@ -14,7 +14,7 @@ function loadClient() {
 
 function execute() {
 
-    var ranges = [
+    let ranges = [
         "A2:B24",
         "C2:D25"
     ];
@@ -24,14 +24,14 @@ function execute() {
         spreadsheetId: "1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks",
         ranges: ranges
     }).then((response) => {
-        var result = response.result;
+        let result = response.result;
         console.log(`${result.valueRanges.length} ranges retrieved.`);
 
         // For each ValueRange object
-        for (var i = 0; i < result.valueRanges.length; i++) {
+        for (let i = 0; i < result.valueRanges.length; i++) {
             // For each town - location list pair
-            for (var j = 0; j < result.valueRanges[i].values.length; j++) {
-                if (result.valueRanges[i].values[j][1] == undefined){
+            for (let j = 0; j < result.valueRanges[i].values.length; j++) {
+                if (result.valueRanges[i].values[j][1] === undefined){
                     townLocDict[result.valueRanges[i].values[j][0]] = "Not here yet!";
                 }
                 else{
