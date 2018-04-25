@@ -1,8 +1,8 @@
 /*1. Run loop to update dictionary.
 2. Run loop to update update markers.*/
 
-var map;
-var posCoordDict = {
+let map;
+const posCoordDict = {
     // As lat increases, it goes up
     // As lng increases, it goes right
     // I hardcoded the positions for now. A loop would, of course, be much better.
@@ -113,13 +113,13 @@ var posCoordDict = {
     "L10" : {lat: 40.9007 - 0.00005 * 5, lng: -74.03365 + 0.00009 * 10},
     "Not here yet!" : {lat:0, lng: 0}
 };
-var markers = [];
-var before = {};
-var first = true;
+let markers = [];
+let before = {};
+let first = true;
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
-    var centerPos = {lat: 40.900464, lng: -74.0333};
+    let centerPos = {lat: 40.900464, lng: -74.0333};
 
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -141,12 +141,12 @@ function bindInfoWindow(marker, map, infowindow, html) {
 }
 
 function setMarkers() {
-    var icon = {
+    let icon = {
         url: 'yellow_school_bus.png',
         scaledSize: new google.maps.Size(40, 40)
     };
     for (town in townLocDict) {
-        var contentString = '<div id="content">'+
+        let contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
             '<h4 id="fourthHeading" class="fourthHeading">' + town + '</h4>'+
@@ -155,11 +155,11 @@ function setMarkers() {
             '</div>'+
             '</div>';
 
-        var infoWindow = new google.maps.InfoWindow({
+        let infoWindow = new google.maps.InfoWindow({
             content: contentString
         });
 
-        var marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
             position: posCoordDict[townLocDict[town]],
             map: map,
             title: town,
@@ -168,13 +168,13 @@ function setMarkers() {
 
         bindInfoWindow(marker, map, infoWindow);
 
-        if (before[town] != undefined){
+        if (before[town] !== undefined){
             marker.setMap(null);
         } else {
             before[town] = marker;
         }
 
-        if (marker.getPosition().lat() != before[town].getPosition().lat() || marker.getPosition().lng() != before[town].getPosition().lng()) {
+        if (marker.getPosition().lat() !== before[town].getPosition().lat() || marker.getPosition().lng() !== before[town].getPosition().lng()) {
             before[town].setMap(null);
             before[town] = marker;
             before[town].setMap(map);
