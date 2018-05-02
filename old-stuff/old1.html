@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,7 +7,6 @@
     <title>BCABus Map</title>
     <!--Google API Key: AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss-->
 
-    <!-- External Links -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
@@ -24,6 +24,7 @@
 
     <script> //Get & Parse JSON
     var app = angular.module('myApp', ['ngCookies']);
+    let newThing;
     app.controller('SuperCtrl',function($scope, $http, $timeout, $cookies) {
         $scope.setCookie = function(cname, cvalue, clear) {
             var expireDate = new Date();
@@ -38,13 +39,15 @@
         $scope.getData = function() {
             //Test: https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json
             //Real: https://spreadsheets.google.com/feeds/list/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/od6/public/values?alt=json
-            $http.get("https://spreadsheets.google.com/feeds/list/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/od6/public/values?alt=json").success(function(response) {
+            $http.get("https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json").success(function(response) {
                 $scope.locations = response.feed.entry;
+                console.log(response);
+                console.log($scope.locations[0].gsx$townsbuslocation.$t);
                 var rowLength = $scope.locations.length;
                 var townsFirst = [];
                 var townsSecond = [];
                 for (var i = 0; i < rowLength; i++) {
-                    if ($scope.locations[i].gsx$townsbuslocation.$t !== "") {
+                    if ($scope.locations[i].gsx$townsbuslocation.$t !== 2) {
                         townsFirst.push({"name": $scope.locations[i].gsx$townsbuslocation.$t.trim()});
                         if ($scope.locations[i].hasOwnProperty('gsx$_cokwr')) {
                             townsFirst[i].location = $scope.locations[i].gsx$_cokwr.$t.toUpperCase().trim();
@@ -167,8 +170,8 @@
 <body class="blue lighten-5" ng-app="myApp" ng-controller="SuperCtrl">
 <head>
     <!-- Search -->
-    <nav class="mobile-content search-nav blue">
-        <div class="nav-wrapper">
+    <nav class="mobile-content search-nav blue row">
+        <div class="col s10 nav-wrapper">
             <form>
                 <div class="input-field">
                     <input class="left-align" id="search" type="search" placeholder="Search for towns here..." autocomplete="off" ng-model="townSearch">
@@ -176,6 +179,7 @@
                 </div>
             </form>
         </div>
+
     </nav>
     <!-- Large Header -->
     <nav class="not-mobile blue">
@@ -212,7 +216,7 @@
                 <li ng-repeat="x in towns | filter: townSearch" style="height: 5%;" id='{{x|lowercase}}' class="noPad collection-item townItem">
                     <div style="margin-top: -2%; margin-bottom: -3%; margin-left: -3%" class="valign-wrapper row">
                         <p class="valign col l9 m9 s9"><span>{{x.name}}</span></p>
-                        <p class="valign locationAlign right-align col l1 m1 s1"><span>{{x.location}}&nbsp;&nbsp;</span></p>
+                        <p class="valign locationAlign right-align col l1 m1 s1"><span>{{x.location }}&nbsp;&nbsp;</span></p>
                         <p ng-click="addFavorite(x)" scroll-top class="valign col l1 m1 s1">
                             <i style="color: grey; cursor: pointer" class="material-icons valign">star</i></p>
                     </div>
@@ -235,15 +239,16 @@
 
 <!-- Footer -->
 <footer class="mobile-content valign page-footer blue darken-2 light-blue-text text-lighten-5 center-align">
-    <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6><h6>Questions? Answers? Email us at <span class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1a0a5a0b1a0b181a3a4b3a6a4afefaeb3a6">[email&#160;protected]</a></span> or <span class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660a130d0a07152604031401030848091401">[email&#160;protected]</a></span>.</h6></div>
+    <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6><h6>Questions? Answers? Email us at <span class="email">adapap@bergen.org</span> or <span class="email">luklas@bergen.org</span>.</h6></div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script></body>
 
 <!--Google Sheets API-->
 
 <script src="https://apis.google.com/js/api.js"></script>
 
 <script src="bcabusmap.js"></script>
+
+</body>
 
 <style>
     body, html {
@@ -307,6 +312,45 @@
         width: 100%;
         padding: 1% 0;
     }
+    .noti-icon {
+        left: -10px !important;
+    }
+    .noti-title {
+        padding: 8px;
+        margin-left: -10px;
+    }
+    .input-icon {
+        font-size: 2.3rem !important;
+    }
+    .input-icon2 {
+        margin-left: -8px !important;
+    }
+    .input-text {
+        margin-top: 5px !important;
+        margin-left: 8px !important;
+        height: 3rem !important;
+    }
+    .anti-padding {
+        margin-left: -10px !important;
+    }
+    .switch *, .lever * {
+        font-size: 1.3rem;
+    }
+    .smsinfo {
+        color: grey;
+        line-height: 1.2rem;
+    }
+    .saveButton {
+        height: 2.4rem !important;
+        line-height: 2.4rem !important;
+    }
+    .d {
+        border: 3px solid orange;
+    }
+    #slide-out {
+        padding-left: 10px;
+        width: 85%;
+    }
     @media only screen and (max-width: 768px) { /* Mobile */
         .not-mobile {
             visibility: hidden;
@@ -328,13 +372,11 @@
     p {
         font-size: 1.7rem;
     }
-
     .row .col.xl {
-        width: 20%;
-        margin-left: 0;
+        width:20%;
+        margin-left:0;
         padding: 0.2% 0;
     }
 }
 </style>
 </html>
-
