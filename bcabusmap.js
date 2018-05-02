@@ -1,6 +1,5 @@
 let response;
 let cellValues;
-let townLocDict = {};
 
 function loadClient() {
     gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
@@ -58,7 +57,9 @@ function sheets() {
 
 gapi.load("client");
 
+/*
 setInterval(function () {
     execute();
     setMarkers();
 }, 3000);
+*/

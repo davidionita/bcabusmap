@@ -14,8 +14,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
+    <script src="dictionaries.js"></script>
+
+    <!--Google Maps API-->
+
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
+            async defer></script>
+
+    <script src="initMap.js"></script>
+
     <script> //Get & Parse JSON
     var app = angular.module('myApp', ['ngCookies']);
+    let newThing;
     app.controller('SuperCtrl',function($scope, $http, $timeout, $cookies) {
         $scope.setCookie = function(cname, cvalue, clear) {
             var expireDate = new Date();
@@ -46,6 +58,10 @@
                     }
                 }
                 $scope.towns = townsFirst.concat(townsSecond);
+
+                newThing = $scope.towns;
+
+                setMarkers();
             });
         }
         $scope.interval = function() {
@@ -84,14 +100,14 @@
     </nav>
 </head>
 
-<!--Google Maps API-->
+<!--Google Maps API
 
 <div id="map"></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
         async defer></script>
 
-<script src="initMap.js"></script>
+<script src="initMap.js"></script>-->
 
 <!-- Main Content: Made By & Towns -->
 <main>
