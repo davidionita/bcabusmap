@@ -61,8 +61,9 @@ function setMarkers() {
             before[newThing[i].name] = marker;
         }
 
-        console.log(marker);
-        if (marker.getPosition().lat() !== before[newThing[i].name].getPosition().lat() || marker.getPosition().lng() !== before[newThing[i].name].getPosition().lng()) {
+        if (marker.getPosition() !== undefined && (
+            marker.getPosition().lat() !== before[newThing[i].name].getPosition().lat() ||
+            marker.getPosition().lng() !== before[newThing[i].name].getPosition().lng())) {
             before[newThing[i].name].setMap(null);
             before[newThing[i].name] = marker;
             before[newThing[i].name].setMap(map);

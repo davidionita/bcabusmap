@@ -1,7 +1,7 @@
 let response;
 let cellValues;
 
-function loadClient() {
+/*function loadClient() {
     gapi.client.setApiKey("AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss");
     return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
         .then(function() {
@@ -43,13 +43,13 @@ function execute() {
         setMarkers();
     });
 
-    /*for (town in townLocDict) {
+    /!*for (town in townLocDict) {
         console.log(town);
         console.log(townLocDict[town]);
-    }*/
+    }*!/
 
 
-}
+}*/
 
 function sheets() {
 
