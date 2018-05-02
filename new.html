@@ -1,13 +1,30 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <!-- External Links -->
+    <meta charset="UTF-8">
+    <title>BCABus Map</title>
+    <!--Google API Key: AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss-->
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <script src="dictionaries.js"></script>
+
+    <!--Google Maps API-->
+
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
+            async defer></script>
+
+    <script src="initMap.js"></script>
+
     <script> //Get & Parse JSON
     var app = angular.module('myApp', ['ngCookies']);
+    let newThing;
     app.controller('SuperCtrl',function($scope, $http, $timeout, $cookies) {
         $scope.setCookie = function(cname, cvalue, clear) {
             var expireDate = new Date();
@@ -47,6 +64,11 @@
 
                 }
                 $scope.towns = townsFirst.concat(townsSecond);
+
+                newThing = $scope.towns;
+
+                setMarkers();
+
                 $scope.favorite = $scope.getCookie('favorite');
                 if ($scope.favorite !== false) {
                     $scope.townNames = $scope.towns.map(function(e) { return e.name; });
@@ -220,6 +242,17 @@
 </footer>
 </body>
 <style>
+    body, html {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    #map {
+        width: 100%;
+        height: 75%;
+    }
     #sitewrap {
     }
     ::-webkit-input-placeholder {
@@ -337,5 +370,6 @@
         margin-left:0;
         padding: 0.2% 0;
     }
+}
 </style>
 </html>
