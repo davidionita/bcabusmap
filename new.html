@@ -37,7 +37,7 @@
             }
         };
         $scope.getData = function() {
-            //Sample: https://spreadsheets.google.com/feeds/list/1tJllDysWV5Xn9C7MKlVDttPXp2jXuQCYLP3jbf4FW28/od6/public/values?alt=json
+            //Test: https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json
             //Real: https://spreadsheets.google.com/feeds/list/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/od6/public/values?alt=json
             $http.get("https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json").success(function(response) {
                 $scope.locations = response.feed.entry;
@@ -240,6 +240,13 @@
 <footer class="mobile-content valign page-footer blue darken-2 light-blue-text text-lighten-5 center-align">
     <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6><h6>Questions? Answers? Email us at <span class="email">adapap@bergen.org</span> or <span class="email">luklas@bergen.org</span>.</h6></div>
 </footer>
+
+<!--Google Sheets API-->
+
+<script src="https://apis.google.com/js/api.js"></script>
+
+<script src="bcabusmap.js"></script>
+
 </body>
 <style>
     body, html {
