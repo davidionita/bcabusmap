@@ -13,15 +13,6 @@
 
     <script src="dictionaries.js"></script>
 
-    <!--Google Maps API-->
-
-    <div id="map"></div>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
-            async defer></script>
-
-    <script src="initMap.js"></script>
-
     <script> //Get & Parse JSON
     var app = angular.module('myApp', ['ngCookies']);
     app.controller('SuperCtrl',function($scope, $http, $timeout, $cookies) {
@@ -184,6 +175,15 @@
         </div>
     </nav>
 </head>
+
+<!--Google Maps API-->
+
+<div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
+        async defer></script>
+
+<script src="initMap.js"></script>
 
 <!-- Main Content: Made By & Towns -->
 <main>
