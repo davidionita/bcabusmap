@@ -27,6 +27,7 @@
             }
         };
         $scope.getData = function() {
+            searchResult = $scope.sResult;
             //Test: https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json
             //Real: https://spreadsheets.google.com/feeds/list/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/od6/public/values?alt=json
             $http.get("https://spreadsheets.google.com/feeds/list/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/od6/public/values?alt=json").success(function(response) {
@@ -54,6 +55,9 @@
                 $scope.towns = townsFirst.concat(townsSecond);
 
                 newThing = $scope.towns;
+
+
+                console.log(newThing);
 
                 setMarkers();
 
@@ -210,7 +214,7 @@
             <!-- Town List -->
             <ul class="townList collection with-header">
                 <li ng-show="townSearch == ''" class="collection-header townList-header valign-wrapper"><h2>Town List</h2></li>
-                <li ng-repeat="x in towns | filter: townSearch" style="height: 5%;" id='{{x|lowercase}}' class="noPad collection-item townItem">
+                <li ng-repeat="x in (sResult = (towns | filter: townSearch))" style="height: 5%;" id='{{x|lowercase}}' class="noPad collection-item townItem">
                     <div style="margin-top: -2%; margin-bottom: -3%; margin-left: -3%" class="valign-wrapper row">
                         <p class="valign col l9 m9 s9"><span>{{x.name}}</span></p>
                         <p class="valign locationAlign right-align col l1 m1 s1"><span>{{x.location}}&nbsp;&nbsp;</span></p>
