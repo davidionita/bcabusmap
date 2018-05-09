@@ -27,7 +27,11 @@
             }
         };
         $scope.getData = function() {
-            searchResult = $scope.sResult;
+            if ($scope.sResult === undefined) {
+                searchResult = [];
+            } else {
+                searchResult = $scope.sResult;
+            }
             //Test: https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json
             //Real: https://spreadsheets.google.com/feeds/list/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/od6/public/values?alt=json
             $http.get("https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json").success(function(response) {
