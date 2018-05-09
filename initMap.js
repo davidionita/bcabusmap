@@ -28,8 +28,16 @@ function bindInfoWindow(marker, map, infowindow, html) {
 }
 
 function setMarkers() {
-    let icon = {
+    let nIcon = {
         url: 'yellow_school_bus.png',
+        scaledSize: new google.maps.Size(40, 40)
+    };
+    let sIcon = {
+        url: 'blue_school_bus.png',
+        scaledSize: new google.maps.Size(40, 40)
+    };
+    let fIcon = {
+        url: 'red_school_bus.png',
         scaledSize: new google.maps.Size(40, 40)
     };
     for (let i = 0; i < newThing.length; i++) {
@@ -46,11 +54,13 @@ function setMarkers() {
             content: contentString
         });
 
+        if (searchResult.includes())
+
         let marker = new google.maps.Marker({
             position: posCoordDict[newThing[i].location],
             map: map,
             title: newThing[i].name,
-            icon: icon
+            icon: nIcon
         });
 
         bindInfoWindow(marker, map, infoWindow);
