@@ -33,7 +33,7 @@ function setMarkers() {
         scaledSize: new google.maps.Size(40, 40)
     };
     let sIcon = {
-        url: 'blue_school_bus.png',
+        url: 'green_school_bus.png',
         scaledSize: new google.maps.Size(40, 40)
     };
     let fIcon = {
@@ -54,13 +54,19 @@ function setMarkers() {
             content: contentString
         });
 
-        if (searchResult.includes())
+        let iconChoice = {};
+
+        if (searchResult.length < 47 && searchResult.some(e => e.name === newThing[i].name)) {
+            iconChoice = sIcon;
+        } else {
+            iconChoice = nIcon
+        }
 
         let marker = new google.maps.Marker({
             position: posCoordDict[newThing[i].location],
             map: map,
             title: newThing[i].name,
-            icon: nIcon
+            icon: iconChoice
         });
 
         bindInfoWindow(marker, map, infoWindow);
