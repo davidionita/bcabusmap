@@ -29,15 +29,15 @@ function bindInfoWindow(marker, map, infowindow, html) {
 
 function setMarkers() {
     let nIcon = {
-        url: 'yellow_school_bus.png',
+        url: 'images/yellow_school_bus.png',
         scaledSize: new google.maps.Size(40, 40)
     };
     let sIcon = {
-        url: 'green_school_bus.png',
+        url: 'images/green_school_bus.png',
         scaledSize: new google.maps.Size(40, 40)
     };
     let fIcon = {
-        url: 'red_school_bus.png',
+        url: 'images/red_school_bus.png',
         scaledSize: new google.maps.Size(40, 40)
     };
     for (let i = 0; i < newThing.length; i++) {
