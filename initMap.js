@@ -41,6 +41,8 @@ function setMarkers() {
         scaledSize: new google.maps.Size(40, 40)
     };
     for (let i = 0; i < newThing.length; i++) {
+        if (newThing[i].location === "") continue;
+
         let contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
@@ -77,10 +79,9 @@ function setMarkers() {
             before[newThing[i].name] = marker;
         }
 
-        if (marker.getPosition() !== undefined && before[newThing[i].name].getPosition() !== undefined && (
-            marker.getPosition().lat() !== before[newThing[i].name].getPosition().lat() ||
+        if (marker.getPosition().lat() !== before[newThing[i].name].getPosition().lat() ||
             marker.getPosition().lng() !== before[newThing[i].name].getPosition().lng() ||
-            marker.getIcon().url !== before[newThing[i].name].getIcon().url)) {
+            marker.getIcon().url !== before[newThing[i].name].getIcon().url) {
             before[newThing[i].name].setMap(null);
             before[newThing[i].name] = marker;
             before[newThing[i].name].setMap(map);
