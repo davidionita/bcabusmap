@@ -77,7 +77,7 @@ function setMarkers() {
             before[newThing[i].name] = marker;
         }
 
-        if (marker.getPosition() !== undefined && (
+        if (marker.getPosition() !== undefined && before[newThing[i].name].getPosition() !== undefined && (
             marker.getPosition().lat() !== before[newThing[i].name].getPosition().lat() ||
             marker.getPosition().lng() !== before[newThing[i].name].getPosition().lng() ||
             marker.getIcon().url !== before[newThing[i].name].getIcon().url)) {
