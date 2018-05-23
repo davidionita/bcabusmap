@@ -62,16 +62,8 @@ function setMarkers() {
         let iconChoice = {};
 
 
-
-        if (searchResult.length < 47 && searchResult.some(e => e.name === jsTowns[i].name)) {
-            iconChoice = sIcon;
-        } else {
-            iconChoice = nIcon
-        }
-
-
         if (window.jsFavArray === undefined || jsTowns === []) {
-            iconChoice = iconChoice;
+            iconChoice = nIcon;
         } else {
             for (let j = 0; j<jsFavArray.length; j++) {
 
@@ -80,9 +72,12 @@ function setMarkers() {
                     break;
                 }
                 else {
-                    iconChoice = iconChoice; } }
+                    iconChoice = nIcon; } }
         }
 
+        if (searchResult.length < 47 && searchResult.some(e => e.name === jsTowns[i].name)) {
+            iconChoice = sIcon;
+        }
 
         let marker = new google.maps.Marker({
             position: posCoordDict[jsTowns[i].location],
