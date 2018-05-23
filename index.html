@@ -31,6 +31,7 @@
             } else {
                 searchResult = $scope.sResult;
             }
+
             //Test: https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json
             //Real: https://spreadsheets.google.com/feeds/list/1S5v7kTbSiqV8GottWVi5tzpqLdTrEgWEY4ND4zvyV3o/od6/public/values?alt=json
             $http.get("https://spreadsheets.google.com/feeds/list/1-0WV-jPKdRStzM6U0XbLKexWPrlK-c9hAWgaVQMhKks/od6/public/values?alt=json").success(function(response) {
@@ -57,7 +58,7 @@
                 }
                 $scope.towns = townsFirst.concat(townsSecond);
 
-                newThing = $scope.towns;
+                jsTowns = $scope.towns;
 
                 setMarkers();
 
@@ -76,7 +77,15 @@
                     $scope.setCookie('favorite',JSON.stringify($scope.favorite));
                 }
                 else { $scope.setCookie('favorite','none'); }
+
+                if ($scope.favorite === undefined) {
+                    jsFavorite = ["Not here yet!"];
+                } else {
+                    jsFavorite = $scope.favorite;
+                }
+
             });
+
         }
         $scope.interval = function() {
             $timeout(function() {
@@ -198,7 +207,7 @@
 
             <!-- Favorite Town -->
             <ul ng-show="true" ng-if="getCookie('favorite') && getCookie('favorite') !== true" class="collection favoriteList">
-                <li ng-repeat="z in favorite" class="collection-item favoriteItem">
+                <li ng-repeat="z in (favorite)" class="collection-item favoriteItem">
                     <div style="margin-top: -4%; margin-bottom: -2%;" class="valign-wrapper row">
                         <h5 class="valign col l10 m10 s10 favoriteTown">{{z.name}}</h5>
                         <p style="margin-left: 0" class="col l2 m2 s2">
