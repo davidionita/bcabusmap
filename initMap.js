@@ -71,7 +71,7 @@ function setMarkers() {
 
 
         if (window.jsFavArray === undefined || jsTowns === []) {
-            iconChoice = nIcon;
+            iconChoice = iconChoice;
         } else {
             for (let j = 0; j<jsFavArray.length; j++) {
 
@@ -80,7 +80,7 @@ function setMarkers() {
                     break;
                 }
                 else {
-                    iconChoice = nIcon; } }
+                    iconChoice = iconChoice; } }
         }
 
 
