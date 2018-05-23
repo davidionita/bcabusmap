@@ -70,6 +70,15 @@
                     $scope.setCookie('favorite',JSON.stringify($scope.favorite));
                 }
                 else { $scope.setCookie('favorite','none'); }
+
+                if ($scope.favorite === undefined) {
+                    jsFavorite = ["Not here yet!"];
+                } else {
+                    jsFavorite = $scope.favorite;
+                }
+
+                console.log(jsFavorite);
+
             });
         }
         $scope.interval = function() {
