@@ -94,6 +94,9 @@
                 setMarkers();
             }, 2500)
         };
+        $scope.interval = function() {
+            $timeout(geolocation(), 1000)
+        };
         $scope.getData();
         $scope.interval();
         $scope.addFavorite = function(val) {
