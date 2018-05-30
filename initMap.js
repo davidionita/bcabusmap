@@ -61,22 +61,15 @@ function setMarkers() {
 
         let iconChoice = {};
 
-        if (window.jsFavArray === undefined || jsTowns === [] || window.jsFavArray === false || window.jsFavArray == true) {
-            iconChoice = nIcon;
-        }
-        else {
-            for (let j = 0; j<window.jsFavArray.length; j++) {
-
-                if (window.jsFavArray[j].name === (jsTowns[i].name)) {
-                    iconChoice = fIcon;
-                    break;
-                }
-                else {
-                    iconChoice = nIcon; } }
-        }
+        iconChoice = nIcon;
 
         if (searchResult.length < 47 && searchResult.some(e => e.name === jsTowns[i].name)) {
             iconChoice = sIcon;
+        }
+
+        if ((window.jsFavArray !== true && window.jsFavArray !== false && window.jsFavArray !== undefined) &&
+            window.jsFavArray.some(e => e.name === jsTowns[i].name)) {
+            iconChoice = fIcon;
         }
 
         let marker = new google.maps.Marker({
