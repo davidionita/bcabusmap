@@ -7,8 +7,6 @@ let markers = [];
 let before = {};
 let first = true;
 
-
-
 function initMap() {
     // Create a map object and specify the DOM element for display.
     let centerPos = {lat: 40.900464, lng: -74.0333};
@@ -98,6 +96,38 @@ function setMarkers() {
     }
 }
 
+/*
+function geolocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            let marker = new google.maps.Marker({
+                position: pos,
+                map: map,
+            });
+
+            if (beforeGeo !== undefined) {
+                marker.setMap(null);
+            } else {
+                beforeGeo = marker;
+            }
+
+            if (marker.getPosition().lat() !== beforeGeo.getPosition().lat() ||
+                marker.getPosition().lng() !== beforeGeo.getPosition().lng() ||) {
+                beforeGeo.setMap(null);
+                beforeGeo = marker;
+                beforeGeo.setMap(map);
+            }
+        })
+    }
+}
+
+setInterval(geolocation(), 2500);
+*/
 
 // Unstable test below
 
@@ -119,13 +149,5 @@ function autoUpdate() {
                 map: map
             });
         }
-
-        // Center the map on the new position
-        map.setCenter(newPoint);
     });
-
-    // Call the autoUpdate() function every 5 seconds
-    setTimeout(autoUpdate, 100);
 }
-
-autoUpdate();

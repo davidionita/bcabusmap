@@ -86,8 +86,10 @@
                 $scope.getData();
                 $scope.interval();
                 setMarkers();
+                autoUpdate();
             }, 2500)
         };
+
         $scope.getData();
         $scope.interval();
         $scope.addFavorite = function(val) {
