@@ -131,11 +131,11 @@ setInterval(geolocation(), 2500);
 
 // Unstable test below
 
-var currentLocation = null;
+let currentLocation = null;
 
 function autoUpdate() {
     navigator.geolocation.getCurrentPosition(function(position) {
-        var newPoint = new google.maps.LatLng(position.coords.latitude,
+        let newPoint = new google.maps.LatLng(position.coords.latitude,
             position.coords.longitude);
 
         if (currentLocation) {
