@@ -61,11 +61,11 @@ function setMarkers() {
 
         let iconChoice = {};
 
-
-        if (window.jsFavArray === undefined || jsTowns === []) {
+        if (window.jsFavArray === undefined || jsTowns === [] || window.jsFavArray === false || window.jsFavArray == true) {
             iconChoice = nIcon;
-        } else {
-            for (let j = 0; j<jsFavArray.length; j++) {
+        }
+        else {
+            for (let j = 0; j<window.jsFavArray.length; j++) {
 
                 if (window.jsFavArray[j].name === (jsTowns[i].name)) {
                     iconChoice = fIcon;
