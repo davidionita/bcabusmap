@@ -105,3 +105,31 @@ function setMarkers() {
     }
 }
 
+var currentLocation = null;
+
+function autoUpdate() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var newPoint = new google.maps.LatLng(position.coords.latitude,
+            position.coords.longitude);
+
+        if (currentLocation) {
+            // Marker already created - Move it
+            currentLocation.setPosition(newPoint);
+        }
+        else {
+            // Marker does not exist - Create it
+            currentLocation = new google.maps.Marker({
+                position: newPoint,
+                map: map
+            });
+        }
+
+        // Center the map on the new position
+        map.setCenter(newPoint);
+    });
+
+    // Call the autoUpdate() function every 5 seconds
+    setTimeout(autoUpdate, 100);
+}
+
+autoUpdate();
