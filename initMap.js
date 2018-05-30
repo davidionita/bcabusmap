@@ -105,6 +105,9 @@ function setMarkers() {
     }
 }
 
+
+// Unstable test below
+
 var currentLocation = null;
 
 function autoUpdate() {
