@@ -19,6 +19,8 @@ function initMap() {
         mapTypeId: 'satellite',
         zoom: 20
     });
+
+
 }
 
 function bindInfoWindow(marker, map, infowindow, html) {
@@ -131,11 +133,11 @@ setInterval(geolocation(), 2500);
 
 // Unstable test below
 
-let currentLocation = null;
+var currentLocation = null;
 
-function autoUpdate() {
+function setLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
-        let newPoint = new google.maps.LatLng(position.coords.latitude,
+        var newPoint = new google.maps.LatLng(position.coords.latitude,
             position.coords.longitude);
 
         if (currentLocation) {
@@ -146,8 +148,17 @@ function autoUpdate() {
             // Marker does not exist - Create it
             currentLocation = new google.maps.Marker({
                 position: newPoint,
-                map: map
+                map: map,
+                icon: "images/bluedot.png"
             });
         }
+
+        // Center the map on the new position
+        // map.setCenter(newPoint);
     });
+
+    // Call the autoUpdate() function every 0.1 seconds
+    setTimeout(setLocation, 100);
 }
+
+setLocation();
