@@ -99,32 +99,55 @@ function setMarkers() {
 
 // Unstable test below
 
-var currentLocation = null;
+
+var locationMarker = null;
+var circle = null;
 
 function setLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
-        var newPoint = new google.maps.LatLng(position.coords.latitude,
-            position.coords.longitude);
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var accuracy = position.coords.accuracy;
 
-        if (currentLocation) {
+        var currentPosition = new google.maps.LatLng(latitude, longitude);
+
+
+        if (locationMarker || circle) {
             // Marker already created - Move it
-            currentLocation.setPosition(newPoint);
+            locationMarker.setPosition(thisLocation);
+            circle.setPosition(thisLocation);
         }
         else {
             // Marker does not exist - Create it
-            currentLocation = new google.maps.Marker({
-                position: newPoint,
+
+            var locationMarker = new google.maps.Marker({
+                position: currentPosition,
                 map: map,
                 icon: "images/bluedot.png"
             });
+
+            var circle = new google.maps.Circle({
+                center: currentPosition,
+                radius: accuracy,
+                map: map,
+                fillColor: '#0080FF',
+                fillOpacity: 0.1,
+                strokeColor: '#002eff',
+                strokeOpacity: 0.75
+            });
+
+//set the zoom level to the circle's size
+
+            //set the zoom level to the circle's size
         }
 
         // Center the map on the new position
         // map.setCenter(newPoint);
-    });
+    }, function() {}, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
 
     // Call the autoUpdate() function every 0.1 seconds
     setTimeout(setLocation, 100);
 }
 
 setLocation();
+
