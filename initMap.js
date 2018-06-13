@@ -11,7 +11,6 @@ function initMap() {
     // Create a map object and specify the DOM element for display.
     let centerPos = {lat: 40.900464, lng: -74.0333};
 
-
     map = new google.maps.Map(document.getElementById('map'), {
         center: centerPos,
         // Set mapTypeId to SATELLITE in order
@@ -97,39 +96,6 @@ function setMarkers() {
 
     }
 }
-
-/*
-function geolocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            let pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-            let marker = new google.maps.Marker({
-                position: pos,
-                map: map,
-            });
-
-            if (beforeGeo !== undefined) {
-                marker.setMap(null);
-            } else {
-                beforeGeo = marker;
-            }
-
-            if (marker.getPosition().lat() !== beforeGeo.getPosition().lat() ||
-                marker.getPosition().lng() !== beforeGeo.getPosition().lng() ||) {
-                beforeGeo.setMap(null);
-                beforeGeo = marker;
-                beforeGeo.setMap(map);
-            }
-        })
-    }
-}
-
-setInterval(geolocation(), 2500);
-*/
 
 // Unstable test below
 
