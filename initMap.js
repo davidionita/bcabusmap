@@ -11,13 +11,23 @@ function initMap() {
     // Create a map object and specify the DOM element for display.
     let centerPos = {lat: 40.900464, lng: -74.0333};
 
+    let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: centerPos,
         // Set mapTypeId to SATELLITE in order
         // to activate satellite imagery.
+        zoom: 18,
         mapTypeId: 'satellite',
-        zoom: 18
     });
+
+
+    if (isMobile) {
+        map.setZoom(18);
+    }
+    else {
+        map.setZoom(20);
+    }
 
 
 }
