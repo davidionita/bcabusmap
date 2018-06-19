@@ -16,7 +16,7 @@ function initMap() {
         // Set mapTypeId to SATELLITE in order
         // to activate satellite imagery.
         mapTypeId: 'satellite',
-        zoom: 20
+        zoom: 18
     });
 
 
@@ -104,12 +104,12 @@ function setLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        var accuracy = position.coords.accuracy;
+        // var accuracy = position.coords.accuracy;
 
         var currentPosition = new google.maps.LatLng(latitude, longitude);
 
 
-        if (locationMarker && circle) {
+        if (locationMarker) {
             // Marker already created - Move it
             locationMarker.setPosition(currentPosition);
             // circle.setPosition(currentPosition);
