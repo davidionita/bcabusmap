@@ -23,7 +23,7 @@ function initMap() {
 
 
     if (isMobile) {
-        map.setZoom(18);
+        map.setZoom(18.5);
     }
     else {
         map.setZoom(20);
