@@ -100,9 +100,6 @@ function setMarkers() {
 // Unstable test below
 
 
-var locationMarker = null;
-var circle = null;
-
 function setLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
         var latitude = position.coords.latitude;
@@ -112,10 +109,10 @@ function setLocation() {
         var currentPosition = new google.maps.LatLng(latitude, longitude);
 
 
-        if (locationMarker || circle) {
+        if (locationMarker && circle) {
             // Marker already created - Move it
-            locationMarker.setPosition(thisLocation);
-            circle.setPosition(thisLocation);
+            locationMarker.setPosition(currentPosition);
+            // circle.setPosition(currentPosition);
         }
         else {
             // Marker does not exist - Create it
@@ -125,7 +122,7 @@ function setLocation() {
                 map: map,
                 icon: "images/bluedot.png"
             });
-
+/*
             var circle = new google.maps.Circle({
                 center: currentPosition,
                 radius: accuracy,
@@ -133,8 +130,9 @@ function setLocation() {
                 fillColor: '#0080FF',
                 fillOpacity: 0.1,
                 strokeColor: '#002eff',
-                strokeOpacity: 0.75
+                strokeOpacity: 0.1
             });
+*/
 
 //set the zoom level to the circle's size
 
