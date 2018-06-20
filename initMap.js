@@ -17,7 +17,7 @@ function initMap() {
         center: centerPos,
         // Set mapTypeId to SATELLITE in order
         // to activate satellite imagery.
-        zoom: 18,
+        zoom: 18.5,
         mapTypeId: 'satellite',
     });
 
