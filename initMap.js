@@ -55,14 +55,14 @@ function setMarkers() {
 
         if (jsTowns[i].location === "") continue;
 
-        let contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
+        let contentString = '<divr>'+
+            '<div>'+
             '</div>'+
-            '<h4 id="fourthHeading" class="fourthHeading">' + jsTowns[i].name + '</h4>'+
-            '<div id="bodyContent">'+
+            '<h5>' + jsTowns[i].name + '</h5>'+
+            '<div>'+
             '<p>' + jsTowns[i].location + '</p>'+
             '</div>'+
-            '</div>';
+            '</divr>';
 
         let infoWindow = new google.maps.InfoWindow({
             content: contentString
