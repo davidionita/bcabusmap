@@ -6,7 +6,7 @@ let townLocDict = {};
 const posCoordDict = {
     // As lat increases, it goes up
     // As lng increases, it goes right
-    // I hardcoded the positions for now. A loop would, of course, be much better.
+    // I hardcoded the positions for now.  Exact positions need to be set.
     "AU" : {lat: 40.901725, lng: -74.034710},
     "E1" : {lat: 40.90030, lng: -74.033900},
     "E2" : {lat: 40.90035, lng: -74.033873},
