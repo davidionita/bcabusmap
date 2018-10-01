@@ -107,7 +107,7 @@ function setMarkers() {
     }
 }
 
-// Unstable test below
+// Unstable test below - Location GPS
 
 
 function setLocation() {
