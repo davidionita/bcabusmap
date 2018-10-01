@@ -107,7 +107,7 @@ function setMarkers() {
     }
 }
 
-// Unstable test below
+// Unstable test below - Location GPS
 
 
 function setLocation() {
@@ -144,9 +144,9 @@ function setLocation() {
             });
 */
 
-//set the zoom level to the circle's size
+// Set the zoom level to the circle's size
 
-            //set the zoom level to the circle's size
+            // Set the zoom level to the circle's size
         }
 
         // Center the map on the new position
