@@ -9,7 +9,7 @@ let first = true;
 
 function initMap() {
     // Create a map object and specify the DOM element for display.
-    let centerPos = {lat: 40.900464, lng: -74.0333};
+    let centerPos = {lat: 40.900464, lng: -74.03345};
 
     let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
