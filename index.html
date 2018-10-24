@@ -13,6 +13,7 @@
     <script src="dictionaries.js"></script>
 
     <script> //Get & Parse JSON
+
     var app = angular.module('myApp', ['ngCookies']);
     app.controller('SuperCtrl',function($scope, $http, $timeout, $cookies) {
         $scope.setCookie = function(cname, cvalue, clear) {
@@ -183,18 +184,30 @@
             <a style="padding: 0 2%" href="#" class="brand-logo">BCABus</a>
         </div>
     </nav>
+    <ul id="tabs-swipe-demo" class="tabs">
+        <li class="tab col s3"><a class="active" href="#test-swipe-1">List</a></li>
+        <li class="tab col s3"><a class="" href="#test-swipe-2">Map</a></li>
+    </ul>
 </head>
 
-<!--Google Maps API-->
 
-<div id="map"></div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap"
-        async defer></script>
+<div id="test-swipe-2">
 
-<script src="initMap.js"></script>
+    <!--Google Maps API-->
 
-<!-- Main Content: Made By & Towns -->
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq2IohIpGlAaHn9fsxI0Gqzk7rWBvhtss&callback=initMap" async defer></script>
+
+    <script src="initMap.js"></script>
+
+</div>
+
+<div id="test-swipe-1">
+
+    <!-- Main Content: Made By & Towns -->
+
 <main>
 
     <div class="row mobile-content" style="padding-top: 2%">
@@ -242,6 +255,8 @@
     </div>
 </main>
 
+</div>
+
 <!-- Footer -->
 <footer class="mobile-content valign page-footer blue darken-2 light-blue-text text-lighten-5 center-align">
     <div style="padding-bottom: 5%"><h3>BCA Bus</h3><h6>Find your bus from anywhere.</h6><h6>Questions? Answers? Email us at <span class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1a0a5a0b1a0b181a3a4b3a6a4afefaeb3a6">[email&#160;protected]</a></span> or <span class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660a130d0a07152604031401030848091401">[email&#160;protected]</a></span>.</h6></div>
@@ -251,6 +266,13 @@
 <!--Google Sheets API-->
 
 <script src="https://apis.google.com/js/api.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#tabs-swipe-demo').tabs({ 'swipeable': true });
+
+    });
+</script>
 
 <!--Styles-->
 
@@ -263,7 +285,8 @@
     }
     #map {
         width: 100%;
-        height: 75%;
+        height: 100%;
+        position: absolute; !important
     }
     #sitewrap {
     }
@@ -344,4 +367,7 @@
     }
 }
 </style>
+<script>
+
+</script>
 </html>

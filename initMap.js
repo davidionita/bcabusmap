@@ -72,7 +72,7 @@ function setMarkers() {
 
         iconChoice = nIcon;
 
-        if (searchResult.length < 47 && searchResult.some(e => e.name === jsTowns[i].name)) {
+        if (searchResult.length < 46 && searchResult.some(e => e.name === jsTowns[i].name)) {
             iconChoice = sIcon;
         }
 
