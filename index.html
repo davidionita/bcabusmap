@@ -268,15 +268,37 @@
 <script src="https://apis.google.com/js/api.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $('#tabs-swipe-demo').tabs({ 'swipeable': true });
+    $(document).ready(function(){
+        console.log("start");
 
+        $('ul.tabs').tabs({
+            swipeable : true,
+            responsiveThreshold : 1920
+        });
+
+        console.log("done");
     });
 </script>
 
 <!--Styles-->
 
 <style>
+    .tabs .tab a{
+        color:rgb(66, 151, 236);
+    } /*Black color to the text*/
+
+    .tabs .tab a:hover {
+        /*background-color:#eee;*/
+        color:rgb(66, 151, 236);
+    } /*Text color on hover*/
+
+    .tabs .tab a.active {
+        color:rgb(66, 151, 236);
+    } /*Background and text color when a tab is active*/
+
+    .tabs .indicator {
+        background-color:rgb(66, 151, 236);
+    } /*Color of underline*/
     body, html {
         height: 100%;
         width: 100%;
